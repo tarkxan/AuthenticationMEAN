@@ -1,7 +1,48 @@
+const User = require('../models/User')
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+const keys = require('../config/keys')
+
 response_status = 200
 
-// post login method
-module.exports.login = (request, response) => {
+// login post method
+module.exports.login = async (request, response) => {
+
+    // check if a user exists
+    const user = await User.findOne({email: request.body.email})
+
+    if (user) {
+        const password_matches = bcrypt.compareSync(
+            request.body.password,
+            user.password)
+
+        let expires_in = 3600 // 1 hour
+        if (password_matches) {
+            console.log('a tocken should be created')
+
+            const token = jwt.sign(
+                {
+                    email: user.email,
+                    user_id: user._id
+                },
+                keys.jwt,
+                { expiresIn: expires_in })
+
+            response.status(200).json({
+                token: `Bearer ${token}`
+            })
+        } else {
+            response.status(401).json({
+                err_msg: 'Wrong password, try again.'
+            })
+        }
+    } else {
+        response.status(404).json({
+            err_msg: `a user with the following email ${request.body.email} does not exist.\n
+            Sign up.`
+        })
+    }
+
     response.status(response_status).json({
         login: {
             email: request.body.email,
@@ -11,13 +52,32 @@ module.exports.login = (request, response) => {
 }
 
 // post regirter method
-module.exports.register = (request, response) => {
-    response.status(response_status).json({
-        login: {
-            first_name: request.body.first_name,
-            last_name: request.body.last_name,
+module.exports.register = async (request, response) => {
+
+    // encrypt password
+    const salt = bcrypt.genSaltSync(10)
+    const password = request.body.password
+
+    // check if a user exists
+    const user = await User.findOne({email: request.body.email})
+
+    if (user) {
+
+        response.status(409).json({
+            err_msg: `a user with the following email ${request.body.email} already exists`
+        })
+    } else {
+        const user = new User({
             email: request.body.email,
-            password: request.body.password
+            password: bcrypt.hashSync(password, salt) // password is hashed
+        })
+
+        try {
+            await user.save()
+            response.status(201).json(user)
+        } catch(err) {
+            console.log(`User creation failed: ${err}`)
         }
-    })
+    }
+        
 }
