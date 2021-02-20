@@ -15,8 +15,10 @@ const position_routes = require('./routes/position')
 const app = express()
 
 // plugins to read json
+app.use(require('morgan')('dev')) // same as const morgan = require('morgan') --> app.use(morgan('dev'))
 app.use(body_parser.urlencoded({extended: true}))
 app.use(body_parser.json())
+app.use(require('cors')())
 
 // auth_routes has '/login', that's why full path will be '/api/auth/login
 app.use('/api/auth', auth_routes)
