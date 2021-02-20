@@ -1,16 +1,15 @@
-const { response } = require("express")
-
 response_status = 200
 
-// post method
+// post login method
 module.exports.login = (request, response) => {
     response.status(response_status).json({
-        // login_success: true
-        login: 'from controller'
+        login: request.body
+        // email: req.body.email,
+        // password: req.body.password
     })
 }
 
-// post method
+// post regirter method
 module.exports.register = (request, response) => {
     response.status(response_status).json({
         register: 'from controller'

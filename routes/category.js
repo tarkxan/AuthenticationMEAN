@@ -4,7 +4,7 @@ const controller = require('../controllers/category')
 // create and instance of a router
 const router = express.Router()
 
-// routes
+// if auth_path = 'http://localhost:5000/api/category/..' - pass functions controller...
 router.get('/', controller.get_all_categories)
 router.get('/:id', controller.get_category_by_id)
 router.delete('/:id', controller.delete_category)

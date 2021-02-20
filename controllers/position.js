@@ -1,27 +1,29 @@
-const { response } = require("express")
-
 response_status = 200
 
+// get all category positions
 module.exports.get_position_by_categ_id = (request, response) => {
     response.status(response_status).json({
-        get_all_categories: 'from controller'
+        get_position_by_categ_id: 'from controller'
     })
 }
 
+// deletye a position
 module.exports.delete_position = (request, response) => {
     response.status(response_status).json({
-        get_all_categories: 'from controller'
+        delete_position: 'from controller'
     })
 }
 
+// create a position
 module.exports.create_position = (request, response) => {
     response.status(response_status).json({
-        get_category_by_id: 'from controller'
+        create_position: 'from controller'
     })
 }
 
+// update a position
 module.exports.update_position = (request, response) => {
     response.status(response_status).json({
-        get_category_by_id: 'from controller'
+        update_position: 'from controller'
     })
 }
