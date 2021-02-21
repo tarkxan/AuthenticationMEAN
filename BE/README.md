@@ -1,6 +1,6 @@
 # AuthenticationMEAN
 
-<!-- epxress server -->
+<!-- BE: Epxress / Node.js -->
 1. create a project
 npm init
 
@@ -37,4 +37,8 @@ index.js - is only responsible for server run
 to kill the server on some port:
 - killall -9 node
 
-
+<!-- FE: Angular -->
+npm install -g @angular/cli
+npm new project
+cd project
+ng serve
