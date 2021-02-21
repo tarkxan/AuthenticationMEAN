@@ -2,6 +2,7 @@ const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const keys = require('../config/keys')
+const error_handler = require('../utils/error-handler');
 
 response_status = 200
 
@@ -70,7 +71,7 @@ module.exports.register = async (request, response) => {
             await new_user.save()
             response.status(201).json(new_user)
         } catch(err) {
-            console.log(`User creation failed: ${err}`)
+            error_handler(response, err)
         }
     } 
 }
