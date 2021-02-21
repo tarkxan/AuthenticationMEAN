@@ -5,7 +5,7 @@ const keys = require('../config/keys')
 
 response_status = 200
 
-// login post method
+// login method
 module.exports.login = async (request, response) => {
 
     // check if a user exists
@@ -16,10 +16,11 @@ module.exports.login = async (request, response) => {
             request.body.password,
             user.password)
 
-        let expires_in = 3600 // 1 hour
         if (password_matches) {
-            console.log('a tocken should be created')
 
+            let expires_in = 3600 // 1 hour
+
+            // create a token
             const token = jwt.sign(
                 {
                     email: user.email,
@@ -38,20 +39,13 @@ module.exports.login = async (request, response) => {
         }
     } else {
         response.status(404).json({
-            err_msg: `a user with the following email ${request.body.email} does not exist.\n
-            Sign up.`
+            err_msg: `A user with the following email ${request.body.email} does not exist.
+            You should sign up instead.`
         })
     }
-
-    response.status(response_status).json({
-        login: {
-            email: request.body.email,
-            password: request.body.password
-        }
-    })
 }
 
-// post regirter method
+// registration method
 module.exports.register = async (request, response) => {
 
     // encrypt password
@@ -59,25 +53,24 @@ module.exports.register = async (request, response) => {
     const password = request.body.password
 
     // check if a user exists
-    const user = await User.findOne({email: request.body.email})
+    const user_exists = await User.findOne({email: request.body.email})
 
-    if (user) {
+    if (user_exists) {
 
         response.status(409).json({
-            err_msg: `a user with the following email ${request.body.email} already exists`
+            err_msg: `A user with the following email ${request.body.email} already exists`
         })
     } else {
-        const user = new User({
+        const new_user = new User({
             email: request.body.email,
             password: bcrypt.hashSync(password, salt) // password is hashed
         })
 
         try {
-            await user.save()
-            response.status(201).json(user)
+            await new_user.save()
+            response.status(201).json(new_user)
         } catch(err) {
             console.log(`User creation failed: ${err}`)
         }
-    }
-        
+    } 
 }
