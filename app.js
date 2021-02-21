@@ -12,6 +12,7 @@ const order_routes = require('./routes/order')
 const position_routes = require('./routes/position')
 
 const mongoose = require('mongoose')
+const passport = require('passport')
 
 // add instance of a server
 const app = express()
@@ -23,6 +24,11 @@ mongoose.connect(keys.mongo_uri)
         console.log('MongoDB connected successfully')
     })
     .catch(error => console.log(`MongoDB connection failed: ${error}`))
+
+// let app know it should work with passport
+app.use(passport.initialize())
+// call middleware
+require('./middleware/passport')(passport)
 
 // plugins to read json
 app.use(require('morgan')('dev')) // same as const morgan = require('morgan') --> app.use(morgan('dev'))
