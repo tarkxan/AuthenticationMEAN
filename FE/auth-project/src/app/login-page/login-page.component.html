@@ -1,43 +1,34 @@
-<!doctype html>
-<html lang="en">
+<body>
 
-    <!-- header -->
-    <head>
-        <meta charset="UTF-8">
-        <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"/> -->
-        <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
-        <title>Login</title>
-    </head>
+    <nav>
+        <div class="nav-wrapper grey darken-1">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li routerLinkActive="active">
+                    <a routerLink="/login">Login</a>
+                </li>
+                <li>
+                    <a routerLink="/signup">Sign Up</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-    <!-- body -->
-    <body>
-
-        <nav>
-            <div class="nav-wrapper grey darken-1">
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a>Login</a></li>
-                    <li><a>Sign Up</a></li>
-                </ul>
+    <div class="auth-block">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">Login</span>
+                <div class="input-field">
+                    <input id="email" type="email" required>
+                    <label for="email">Email:</label>
+                </div>
+                <div class="input-field">
+                    <input id="password" type="password" required>
+                    <label for="password">Password:</label>
+                </div>
             </div>
-        </nav>
-
-        <div class="auth-block">
-            <div class="card">
-                <div class="card-content">
-                    <span class="card-title">Login</span>
-                    <div class="input-field">
-                        <input id="email" type="email" required>
-                        <label for="email">Email:</label>
-                    </div>
-                    <div class="input-field">
-                        <input id="password" type="password" required>
-                        <label for="password">Password:</label>
-                    </div>
-                </div>
-                <div class="card-action">
-                    <button class="modal-action btn waves-effect">Login</button>
-                </div>
+            <div class="card-action">
+                <button class="modal-action btn waves-effect">Login</button>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+</body>

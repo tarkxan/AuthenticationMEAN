@@ -1,43 +1,35 @@
-<!doctype html>
-<html lang="en">
+<body>
 
-    <!-- header -->
-    <head>
-        <meta charset="UTF-8">
-        <title>Dashboard</title>
-    </head>
+    <nav>
+        <div class="nav-wrapper  grey darken-1">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    <a routerLink="/login">Login</a>
+                </li>
+                <li>
+                    <a routerLink="/signup">Sign Up</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-    <!-- body -->
-    <body>
-
-        <nav>
-            <div class="nav-wrapper  grey darken-1">
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a>Login</a></li>
-                    <li><a>Sign Up</a></li>
-                </ul>
+    <div class="auth-block">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">Create Account</span>
+                <div class="input-field">
+                    <input id="email" type="email" required>
+                    <label for="email">Email:</label>
+                </div>
+                <div class="input-field">
+                    <input id="password" type="password" required>
+                    <label for="password">Password:</label>
+                </div>
             </div>
-        </nav>
-
-
-        <div class="auth-block">
-            <div class="card">
-                <div class="card-content">
-                    <span class="card-title">Create Account</span>
-                    <div class="input-field">
-                        <input id="email" type="email" required>
-                        <label for="email">Email:</label>
-                    </div>
-                    <div class="input-field">
-                        <input id="password" type="password" required>
-                        <label for="password">Password:</label>
-                    </div>
-                </div>
-                <div class="card-action">
-                    <button class="modal-action btn waves-effect">Sign Up</button>
-                </div>
+            <div class="card-action">
+                <button class="modal-action btn waves-effect">Sign Up</button>
             </div>
         </div>
+    </div>
 
-    </body>
-</html>
+</body>
