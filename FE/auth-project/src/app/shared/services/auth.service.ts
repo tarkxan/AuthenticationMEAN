@@ -10,6 +10,7 @@ import { tap } from 'rxjs/operators'
 export class AuthService {
 
   private login_url = '/api/auth/login'
+  private signup_url = '/api/auth/register'
   private token: string | undefined
 
   constructor(private http: HttpClient) {
@@ -47,7 +48,8 @@ export class AuthService {
     localStorage.clear()
   }
 
-  sign_up(user: User) {
+  sign_up(user: User): Observable<User> {
       
+    return this.http.post<User>(this.signup_url, user)
   }
 }

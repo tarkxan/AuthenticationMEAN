@@ -1,9 +1,8 @@
 <body>
-
     <nav>
-        <div class="nav-wrapper  grey darken-1">
+        <div class="nav-wrapper grey darken-1">
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li>
+                <li routerLinkActive="active">
                     <a routerLink="/login">Login</a>
                 </li>
                 <li>
@@ -14,26 +13,49 @@
     </nav>
 
     <div class="auth-block">
-        <form class="card">
+        <form class="card" 
+            [formGroup]="signupForm"
+            (ngSubmit)="onSubmit()">
+
             <div class="card-content">
-                <span class="card-title">Create Account</span>
+                <span class="card-title">Login</span>
+
                 <div class="input-field">
-                    <input id="email" type="email" required>
+                    <input 
+                        formControlName="email"
+                        id="email" 
+                        type="email"
+                        >
                     <label for="email">Email:</label>
+                    <!-- <span 
+                        class="helper-text red-text"
+                        *ngIf="(signupForm.get('email').invalid && signupForm.get('email').touched)"
+                        >
+                        <span *ngIf="signupForm.get('email').errors['required']">
+                            Email should not be blank
+                        </span>
+                        <span *ngIf="signupForm.get('email').errors['email']">
+                            Please input a valid email address
+                        </span>
+                    </span> -->
                 </div>
+
                 <div class="input-field">
-                    <input id="password" type="password" required>
+                    <input
+                    formControlName="password"
+                        id="password"
+                        type="password">
                     <label for="password">Password:</label>
                 </div>
             </div>
             <div class="card-action">
                 <button 
+                    type="submit"
                     class="modal-action btn waves-effect"
-                    type="submit">
+                    [disabled]="signupForm.invalid || signupForm.disabled">
                     Sign Up
                 </button>
             </div>
         </form>
     </div>
-
 </body>
