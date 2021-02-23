@@ -38,13 +38,14 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       )
     })
 
-    // has all information about the currebt route
+    // has all information about the current route
     this.route.queryParams.subscribe((params: Params) => {
       
       if (params['registered']) {
 
         console.log('You can login suing your credentials')
-      } else if(params['accessDenied']) {
+      } 
+      else if (params['accessDenied']) {
         console.log('Please login first')
       }
 
