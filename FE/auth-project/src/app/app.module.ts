@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 
-// components
+// components and services
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { SignupPageComponent } from './signup-page/signup-page.component';
+import { TokenInterceptorService } from './shared/classes/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,13 @@ import { SignupPageComponent } from './signup-page/signup-page.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: TokenInterceptorService
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
